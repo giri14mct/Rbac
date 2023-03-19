@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
   namespace :api do
     namespace :v1 do
+      resources :comments, only: %i[index create]
       resources :users, only: %i[index update destroy]
     end
   end
