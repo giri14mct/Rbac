@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   def authorize_admin!
     return if current_user.super_admin? || current_user.admin?
 
-    raise UnAuthorized, 'You are not authorized to perform this action'
+    raise InvalidParams, 'You are not authorized to perform this action'
   end
 
   def current_user

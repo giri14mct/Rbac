@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   end
   namespace :api do
     namespace :v1 do
-      resources :comments, only: %i[index create]
+      resources :comments, only: %i[index create update]
       resources :users, only: %i[index update destroy]
     end
   end
+
+  match '*path', to: 'application#catch_all', via: :all
 end

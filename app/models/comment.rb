@@ -3,12 +3,22 @@ class Comment < ApplicationRecord
 
   validates :content, presence: true
 
+  enum status: {
+    drafted: 0,
+    approved: 1,
+    publised: 2
+  }
+
+  before_create do
+    self.status ||= :drafted
+  end
+
   def created_by
-    User.find(user_id).as_json(only: %i[email role])
+    User.find_by(user_id).as_json(only: %i[email role])
   end
 
   def object_json
-    as_json(only: :content, methods: :created_by)
+    as_json(only: %i[id content])
   end
 
   def self.serach_data
