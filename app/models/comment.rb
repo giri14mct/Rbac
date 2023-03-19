@@ -14,14 +14,26 @@ class Comment < ApplicationRecord
   end
 
   def created_by
-    User.find_by(user_id).as_json(only: %i[email role])
+    User.find_by(id: user_id).as_json(only: %i[email role])
+  end
+
+  def approved_person
+    User.find_by(id: approved_by).as_json(only: %i[email role])
   end
 
   def object_json
-    as_json(only: %i[id content])
+    as_json(
+      only: %i[id content],
+      methods: %i[created_by approved_person]
+    )
   end
 
-  def self.serach_data
-    [all.map(&:object_json), count]
+  def self.search_data(status: false)
+    comment_status = status || statuses.keys
+    data = where(status: comment_status)
+    [
+      data.map(&:object_json),
+      data.count
+    ]
   end
 end

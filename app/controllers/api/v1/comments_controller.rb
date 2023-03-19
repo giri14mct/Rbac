@@ -3,6 +3,16 @@ module Api
     class CommentsController < ApplicationController
       before_action :authorize_admin!, only: :update
 
+      def index
+        data, total_count = check_role_is_admin? ? Comment.search_data : Comment.search_data(status: :publised)
+
+        render json: {
+          status: true,
+          data: data,
+          total_count: total_count
+        }
+      end
+
       def create
         Comment.create!(create_params)
 
@@ -32,6 +42,10 @@ module Api
         params.require(:comment).permit(:content).merge(
           user_id: current_user.id
         )
+      end
+
+      def check_role_is_admin?
+        current_user.admin? || current_user.super_admin?
       end
     end
   end
