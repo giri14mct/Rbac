@@ -7,16 +7,6 @@ class ApplicationController < ActionController::Base
     url_not_fond
   end
 
-  def index
-    data, total_count = klass.search_data
-
-    render json: {
-      status: true,
-      data: data,
-      total_count: total_count
-    }
-  end
-
   def authorize_admin!
     return if current_user.super_admin? || current_user.admin?
 
