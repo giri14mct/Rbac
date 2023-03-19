@@ -27,6 +27,6 @@ rails db:migrate
 Run
 
 ```
-rails s -p 5060
+rails s -p 5000
 
 ```
