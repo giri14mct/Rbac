@@ -26,10 +26,10 @@ module Api
         status = if current_user.admin?
                    :approved
                  elsif current_user.super_admin?
-                   :publised
+                   :published
                  end
 
-        object.update(status: status, approved_by: current_user.id)
+        object.update!(status: status, approved_by: current_user.id)
         render json: {
           status: true,
           message: 'Saved Successfully..!!'

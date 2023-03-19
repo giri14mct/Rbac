@@ -6,7 +6,7 @@ class Comment < ApplicationRecord
   enum status: {
     drafted: 0,
     approved: 1,
-    publised: 2
+    published: 2
   }
 
   before_create do
