@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token
   before_action :current_user, except: %i[singup login]
 
+  def catch_all
+    url_not_fond
+  end
+
   def index
     data, total_count = klass.serach_data
 

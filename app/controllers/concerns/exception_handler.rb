@@ -54,4 +54,11 @@ module ExceptionHandler
       data: exception.record.error_msgs
     }, status: :unprocessable_entity
   end
+
+  def url_not_fond
+    render json: {
+      status: false,
+      message: 'URL Not Found'
+    }, status: :not_found
+  end
 end
