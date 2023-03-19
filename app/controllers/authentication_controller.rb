@@ -5,7 +5,7 @@ class AuthenticationController < ApplicationController
     User.create!(singup_params)
     render json: {
       status: true,
-      message: 'User created successfully..!!'
+      message: 'User Created Successfully..!!'
     }
   end
 

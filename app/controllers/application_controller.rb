@@ -3,12 +3,27 @@ class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token
   before_action :current_user, except: %i[singup login]
 
-  def authorize_super_admin!
-    raise UnAuthorized, 'You are not authorized to perform this action' unless current_user.super_admin?
+  def index
+    data, total_count = klass.serach_data
+
+    render json: {
+      status: true,
+      data: data,
+      total_count: total_count
+    }
+  end
+
+  def authorize_admin!
+    return if current_user.super_admin? || current_user.admin?
+
+    raise UnAuthorized, 'You are not authorized to perform this action'
   end
 
   def current_user
     @current_user ||= User.find_by(session_token: auth_header)
+    raise UnAuthorized unless @current_user.present?
+
+    @current_user
   end
 
   def klass

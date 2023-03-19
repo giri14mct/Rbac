@@ -17,4 +17,14 @@ class User < ApplicationRecord
     self.role ||= :user
     self.status ||= :active
   end
+
+  def object_json
+    as_json(
+      except: %i[password session_token created_at updated_at]
+    )
+  end
+
+  def self.serach_data
+    [all.map(&:object_json), count]
+  end
 end
