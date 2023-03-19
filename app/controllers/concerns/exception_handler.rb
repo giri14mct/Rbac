@@ -1,7 +1,6 @@
 module ExceptionHandler
   extend ActiveSupport::Concern
 
-  class InvalidParams < StandardError; end
   included do
     rescue_from StandardError, with: :internal_server_error
     rescue_from InvalidParams, with: :invalid_params
