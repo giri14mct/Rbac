@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def index
-    data, total_count = klass.serach_data
+    data, total_count = klass.search_data
 
     render json: {
       status: true,

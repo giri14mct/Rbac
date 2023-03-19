@@ -25,7 +25,7 @@ class User < ApplicationRecord
     )
   end
 
-  def self.serach_data
+  def self.search_data
     [all.map(&:object_json), count]
   end
 end
