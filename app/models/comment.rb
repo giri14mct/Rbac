@@ -23,7 +23,7 @@ class Comment < ApplicationRecord
 
   def object_json
     as_json(
-      only: %i[id content],
+      only: %i[id content status],
       methods: %i[created_by approved_person]
     )
   end
