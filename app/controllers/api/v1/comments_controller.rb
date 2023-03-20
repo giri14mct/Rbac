@@ -4,7 +4,7 @@ module Api
       before_action :authorize_admin!, only: :update
 
       def index
-        data, total_count = check_role_is_admin? ? Comment.search_data : Comment.search_data(status: :publised)
+        data, total_count = check_role_is_admin? ? Comment.search_data : Comment.search_data(status: :published)
 
         render json: {
           status: true,
