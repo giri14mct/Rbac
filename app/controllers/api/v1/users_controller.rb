@@ -14,7 +14,18 @@ module Api
       end
 
       def update
-        object.update!(status: params[:status])
+        role, status = if current_user.admin?
+                         if params[:role] == 'super_admin'
+                           raise InvalidParams, 'You are not authorized to perform this action'
+                         end
+
+                         [params[:role], params[:status]]
+
+                       elsif current_user.super_admin?
+                         [params[:role], params[:status]]
+                       end
+
+        object.update!(role: role, status: status)
 
         render json: {
           status: true,
