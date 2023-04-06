@@ -41,6 +41,14 @@ module Api
           message: 'User Deleted Successfully..!!'
         }
       end
+
+      def role
+        render json: {
+          status: true,
+          message: 'Login Successfully..!!',
+          data: object.as_json(only: %i[session_token role])
+        }
+      end
     end
   end
 end
