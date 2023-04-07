@@ -10,8 +10,8 @@ class AuthenticationController < ApplicationController
   end
 
   def login
-    user = User.active.find_by(email: params[:email])
-    raise UnAuthorized unless user.present? && user.password == params[:password]
+    @user = User.active.find_by(email: params[:email])
+    raise UnAuthorized unless user.present? && check_password
 
     user.update!(session_token: SecureRandom.hex(20), last_logged_in: Time.zone.now)
     render json: {
@@ -34,11 +34,19 @@ class AuthenticationController < ApplicationController
 
   private
 
+  attr_accessor :user
+
   def singup_params
-    params.require(:user).permit(:name, :email, :password, :role)
+    params.require(:user).permit(:name, :email, :role).merge(
+      password: Encryption::Crypter.encrypt(params[:user][:password])
+    )
   end
 
   def validate_password?
     params[:user][:password] == params[:user][:password_confirmation]
+  end
+
+  def check_password
+    params[:password] == Encryption::Crypter.decrypt(eval(user.password).deep_symbolize_keys)
   end
 end

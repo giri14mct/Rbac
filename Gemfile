@@ -7,6 +7,7 @@ ruby '3.0.0'
 
 gem 'bootsnap', require: false
 gem 'dotenv-rails'
+gem 'encryptor', '~> 3.0.0'
 gem 'importmap-rails'
 gem 'jbuilder'
 gem 'pg'

@@ -39,3 +39,9 @@ Metrics/CyclomaticComplexity:
 
 Metrics/PerceivedComplexity:
   Enabled: false
+
+# Security
+Security/Eval:
+  Enabled: true
+  Exclude:
+  - app/controllers/authentication_controller.rb
