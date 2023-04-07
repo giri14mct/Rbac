@@ -46,7 +46,7 @@ module Api
         render json: {
           status: true,
           message: 'Login Successfully..!!',
-          data: object.as_json(only: %i[session_token role])
+          data: object.as_json(only: %i[id session_token role])
         }
       end
     end

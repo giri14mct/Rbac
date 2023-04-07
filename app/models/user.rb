@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  default_scope { order(last_logged_in: :desc) }
+
   validates :email, format: { with: EMAIL_REGEX }, presence: true, uniqueness: true
   validates :password, presence: true
 

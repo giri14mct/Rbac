@@ -17,7 +17,7 @@ class AuthenticationController < ApplicationController
     render json: {
       status: true,
       message: 'Login Successfully..!!',
-      data: user.as_json(only: %i[session_token role])
+      data: user.as_json(only: %i[id session_token role])
     }
   end
 
