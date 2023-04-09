@@ -37,9 +37,7 @@ class AuthenticationController < ApplicationController
   attr_accessor :user
 
   def singup_params
-    params.require(:user).permit(:email).merge(
-      password: Encryption::Crypter.encrypt(params[:user][:password])
-    )
+    params.require(:user).permit(:email, :password)
   end
 
   def validate_password?
@@ -48,6 +46,6 @@ class AuthenticationController < ApplicationController
   end
 
   def check_password
-    params[:password] == Encryption::Crypter.decrypt(eval(user.password).deep_symbolize_keys)
+    user.authenticate(params[:password]).present?
   end
 end

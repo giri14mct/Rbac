@@ -5,9 +5,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
 
+gem 'bcrypt'
 gem 'bootsnap', require: false
 gem 'dotenv-rails'
-gem 'encryptor', '~> 3.0.0'
 gem 'importmap-rails'
 gem 'jbuilder'
 gem 'pg'

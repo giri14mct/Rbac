@@ -1,8 +1,10 @@
 class User < ApplicationRecord
+  has_secure_password
+
   default_scope { order(last_logged_in: :desc) }
 
   validates :email, format: { with: EMAIL_REGEX }, presence: true, uniqueness: true
-  validates :password, presence: true
+  validates :password_digest, presence: true
 
   has_many :comments
   enum status: {
@@ -23,7 +25,7 @@ class User < ApplicationRecord
 
   def object_json
     as_json(
-      except: %i[password session_token created_at updated_at]
+      except: %i[password_digest session_token created_at updated_at]
     )
   end
 
