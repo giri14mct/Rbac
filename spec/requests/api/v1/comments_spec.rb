@@ -39,4 +39,19 @@ RSpec.describe Api::V1::CommentsController, type: :request do
       end
     end
   end
+
+  describe 'POST /create' do
+    context 'When create the comment with content' do
+      it 'returns creted successfully' do
+        params = { comment: { content: 'Hello World', user_id: user.id } }
+
+        headers = {
+          'Authorization' => user.session_token
+        }
+        post '/api/v1/comments', headers: headers, params: params
+        expect(response.status).to eq(201)
+        expect(JSON.parse(response.body)['message']).to eq('Created Successfully..!!')
+      end
+    end
+  end
 end
