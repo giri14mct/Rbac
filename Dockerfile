@@ -16,7 +16,7 @@ RUN bundle install --jobs 20 --retry 1
 COPY . .
 
 # Set environment variables
-ENV RAILS_ENV=development
+ENV RAILS_ENV=production
 
 # Start application
-CMD ["rails", "server", "-b", "0.0.0.0", "-p", "4000"]
+CMD ["rails", "server", "-b", "0.0.0.0", "-p", "3000"]
