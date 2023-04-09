@@ -25,6 +25,7 @@ jobs:
         gem install bundler
         bundle install --jobs 4 --retry 1
       continue-on-error: false
+    # Runs the Migration  
     - name: Run Database Migrations
       run: bundle exec rails db:migrate
       continue-on-error: false
@@ -32,6 +33,6 @@ jobs:
     - name: Run RuboCop
       run: bundle exec rubocop
       continue-on-error: false
-    # runs the test suite  
-    # - name: Run tests
-      # run: bundle exec rspec
+    # Runs the test suite  
+    - name: Run tests
+      run: bundle exec rspec

@@ -6,7 +6,7 @@ class AuthenticationController < ApplicationController
     render json: {
       status: true,
       message: 'User Created Successfully..!!'
-    }
+    }, status: :created
   end
 
   def login
@@ -37,13 +37,14 @@ class AuthenticationController < ApplicationController
   attr_accessor :user
 
   def singup_params
-    params.require(:user).permit(:name, :email, :role).merge(
+    params.require(:user).permit(:email).merge(
       password: Encryption::Crypter.encrypt(params[:user][:password])
     )
   end
 
   def validate_password?
-    params[:user][:password] == params[:user][:password_confirmation]
+    password_fields = params[:user].slice(:password, :password_confirmation)
+    password_fields.values.all?(&:present?) && password_fields[:password] == password_fields[:password_confirmation]
   end
 
   def check_password

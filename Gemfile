@@ -21,6 +21,7 @@ gem 'sprockets-rails'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'rspec-rails', '~> 6.0.0'
   gem 'rubocop', '~> 1.19.1'
 end
 
