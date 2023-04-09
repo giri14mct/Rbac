@@ -23,6 +23,8 @@ module Api
 
                        elsif current_user.super_admin?
                          [params[:role], params[:status]]
+                       elsif current_user.user?
+                         raise InvalidParams, 'You are not authorized to perform this action'
                        end
 
         object.update!(role: role, status: status)
