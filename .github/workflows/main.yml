@@ -23,8 +23,7 @@ jobs:
     - name: Install dependencies
       run: |
         gem install bundler
-        bundle config set --local deployment true
-        bundle install --jobs 4 --retry 1 --deployment
+        bundle install --jobs 4 --retry 1
       continue-on-error: false
     # Runs the Migration  
     - name: Run Database Migrations
