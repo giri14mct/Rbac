@@ -27,6 +27,8 @@ Metrics/MethodLength:
 
 Metrics/BlockLength:
   Max: 30
+  Exclude:
+  - spec/**/*
 
 Metrics/BlockNesting:
   Enabled: false

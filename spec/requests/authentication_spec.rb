@@ -31,4 +31,21 @@ RSpec.describe AuthenticationController, type: :controller do
       end
     end
   end
+
+  describe 'POST #login' do
+    context 'with valid credentials' do
+      it 'login the user' do
+        post :login, params: { email: 'giritharan1405@gamil.com', password: 'giritharan' }
+        expect(response).to have_http_status(200)
+        expect(JSON.parse(response.body)['message']).to include('Login Successfully..!!')
+      end
+    end
+
+    context 'with invalid credentials' do
+      it 'invalida credentials' do
+        post :login, params: { email: '', password: '' }
+        expect(response.status).to eq(401)
+      end
+    end
+  end
 end
