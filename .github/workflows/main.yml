@@ -23,7 +23,12 @@ jobs:
     - name: Install dependencies
       run: |
         gem install bundler
-        bundle install --jobs 4 --retry 1
+        bundle config set --local deployment true
+        bundle install --jobs 4 --retry 1 --deployment
+      continue-on-error: false
+    # Runs the Migration  
+    - name: Run Database Migrations
+      run: bundle exec rails db:migrate
       continue-on-error: false
     # Runs the rubocop   
     - name: Run RuboCop
