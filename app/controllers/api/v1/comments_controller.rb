@@ -23,6 +23,10 @@ module Api
       end
 
       def update
+        if current_user.admin? && params[:status] == 'published'
+          raise InvalidParams, 'You are not authorized to perform this action'
+        end
+
         object.update!(status: params[:status], approved_by: current_user.id)
 
         render json: {

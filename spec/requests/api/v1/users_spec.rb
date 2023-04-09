@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::UsersController, type: :request do
   let(:user) do
-    User.create(email: 'user@gmail.com', password: 'password', role: :user, session_token: SecureRandom.hex(20))
+    User.create(email: 'user@gmail.com', password: 'password', session_token: SecureRandom.hex(20))
   end
   let(:admin) do
     User.create(email: 'user1@gmail.com', password: 'password', role: :admin, session_token: SecureRandom.hex(20))
