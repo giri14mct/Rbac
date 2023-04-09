@@ -19,7 +19,7 @@ module Api
         render json: {
           status: true,
           message: 'Created Successfully..!!'
-        }
+        }, status: :created
       end
 
       def update
