@@ -28,7 +28,6 @@ jobs:
     # Runs the Migration  
     - name: Run Database Migrations
       run: bundle exec rails db:migrate
-      continue-on-error: false
     # Runs the rubocop   
     - name: Run RuboCop
       run: bundle exec rubocop
